@@ -1,298 +1,386 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <title>Jiuhai Chen</title>
-    <base target="_blank">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&amp;display=swap" rel="stylesheet"/>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Jiuhai Chen</title>
+<meta name="description" content="Jiuhai Chen — researcher in multimodal and large language models: visual perception, visual generation, and reasoning." />
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YOUR_MEASUREMENT_ID"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;450;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
-      gtag('config', 'G-YOUR_MEASUREMENT_ID'); // Make sure to replace this!
-    </script>
-    <style>
-        /* your customized css style */
-        body {
-            font-family: 'Open Sans', sans-serif;
-        }
-        .hover\:text-orange-500:hover {
-            color: #f97316;
-        }
-        .hover\:text-blue-500:hover {
-            color: rgb(59 130 246);
-        }
-        .hover\:text-underline:hover {
-            text-decoration: underline;
-        }
-        .paper-title {
-            /* Add any specific styles for paper titles here if needed */
-        }
-        .paper-author {
-            margin-right: -3px;
-        }
-        .paper-author:hover {
-            color: rgb(59 130 246);
-            text-decoration: underline;
-        }
-        .author-link {
-            color: rgb(59 130 246);
-        }
-        .anchor-link:hover {
-            text-decoration: underline;
-        }
-        .self-author {
-            margin-right: -3px;
-            font-weight: bold;
-        }
+<style>
+  :root{
+    --paper:#fbfaf7;
+    --paper-2:#f3f1ea;
+    --ink:#1b1a17;
+    --ink-soft:#4a463f;
+    --ink-faint:#8a857a;
+    --rule:#e4e0d6;
+    --accent:#27407a;       /* muted scholarly navy */
+    --accent-soft:#33509133;
+    --maxw:760px;
+  }
 
-        /* Styles specifically for the profile image */
-        /* This ensures the image is exactly 160x160 and then rounded by Tailwind */
-        .profile-image {
-            width: 160px;
-            height: 160px;
-            /* object-fit: cover; /* Uncomment if you want the image to crop to fit its 160x160 space */
-            /* object-position: center; /* Uncomment if using object-fit to center the image within the space */
-        }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Inter",system-ui,-apple-system,sans-serif;
+    font-size:16px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  a{color:inherit;text-decoration:none;}
+  a:focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:3px;
+    border-radius:2px;
+  }
 
-        /* Note: paper-img-bg is still defined, but its width/height rules might conflict if applied to profile-image */
-        /* If .paper-img-bg is also intended for this profile image, you might combine or adjust rules. */
-        /* For 160x160, I've added .profile-image and removed w-full from img tag below. */
-        .paper-img-bg {
-             /* These usually apply to background images, not direct <img> tags */
-             /* Keeping them here for now, but be aware they don't affect `src` */
-            background-size: cover;
-            background-position: center;
-        }
+  .wrap{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:88px 28px 120px;
+  }
 
-        /* Styles for other paper images, if applicable (your original had these) */
-        .paper-item img {
-            min-width: 12rem;
-            height: 10rem;
-            object-fit: contain;
-        }
+  /* ---------- Header ---------- */
+  .header{
+    display:grid;
+    grid-template-columns:1fr 132px;
+    gap:36px;
+    align-items:start;
+  }
+  .name{
+    font-family:"Source Serif 4",Georgia,serif;
+    font-weight:600;
+    font-size:clamp(2.3rem,6vw,3.1rem);
+    line-height:1.04;
+    letter-spacing:-0.02em;
+    margin:0 0 22px;
+  }
+  .bio{
+    color:var(--ink-soft);
+    font-size:1.02rem;
+    margin:0 0 16px;
+    max-width:46ch;
+  }
+  .bio a{
+    color:var(--accent);
+    text-decoration:underline;
+    text-decoration-color:var(--accent-soft);
+    text-underline-offset:2px;
+    transition:text-decoration-color .15s ease;
+  }
+  .bio a:hover{text-decoration-color:var(--accent);}
 
-        /* end your customized css style */
-    </style>
+  .portrait{
+    width:132px;
+    height:132px;
+    border-radius:50%;
+    object-fit:cover;
+    background:var(--paper-2);
+    border:1px solid var(--rule);
+    box-shadow:0 1px 0 rgba(0,0,0,.04);
+  }
+
+  /* ---------- Contact row ---------- */
+  .links{
+    display:flex;
+    flex-wrap:wrap;
+    gap:9px;
+    margin-top:26px;
+  }
+  .links a{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:.74rem;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    padding:6px 12px;
+    border:1px solid var(--rule);
+    border-radius:999px;
+    background:#fff;
+    transition:border-color .15s ease,color .15s ease,transform .15s ease;
+  }
+  .links a:hover{
+    color:var(--accent);
+    border-color:var(--accent);
+    transform:translateY(-1px);
+  }
+
+  /* ---------- Section heading ---------- */
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap:14px;
+    margin:84px 0 8px;
+  }
+  .section-head h2{
+    font-family:"IBM Plex Mono",monospace;
+    font-weight:500;
+    font-size:.78rem;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin:0;
+    white-space:nowrap;
+  }
+  .section-head .line{
+    flex:1;
+    height:1px;
+    background:var(--rule);
+  }
+
+  /* ---------- Publications: year rail ---------- */
+  .pub{
+    display:grid;
+    grid-template-columns:64px 1fr;
+    gap:24px;
+    padding:26px 0;
+    border-bottom:1px solid var(--rule);
+  }
+  .pub:last-child{border-bottom:none;}
+
+  .year{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:.82rem;
+    color:var(--ink-faint);
+    padding-top:2px;
+    font-variant-numeric:tabular-nums;
+  }
+  .year.repeat{visibility:hidden;}
+
+  .pub-title{
+    font-family:"Source Serif 4",Georgia,serif;
+    font-weight:600;
+    font-size:1.12rem;
+    line-height:1.32;
+    letter-spacing:-0.01em;
+    margin:0 0 7px;
+    color:var(--ink);
+  }
+  .pub-title a{
+    background-image:linear-gradient(var(--accent),var(--accent));
+    background-size:0% 1px;
+    background-repeat:no-repeat;
+    background-position:0 100%;
+    transition:background-size .25s ease,color .15s ease;
+    padding-bottom:1px;
+  }
+  .pub-title a:hover{
+    color:var(--accent);
+    background-size:100% 1px;
+  }
+
+  .authors{
+    color:var(--ink-soft);
+    font-size:.92rem;
+    line-height:1.55;
+    margin:0 0 9px;
+  }
+  .authors .me{font-weight:600;color:var(--ink);}
+
+  .meta{
+    display:flex;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .venue{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:.7rem;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--accent);
+    background:#fff;
+    border:1px solid var(--accent-soft);
+    border-radius:4px;
+    padding:2px 7px;
+  }
+  .resources{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:.78rem;
+    color:var(--ink-faint);
+  }
+  .resources a{
+    color:var(--ink-soft);
+    text-decoration:underline;
+    text-decoration-color:var(--rule);
+    text-underline-offset:2px;
+    transition:color .15s ease,text-decoration-color .15s ease;
+  }
+  .resources a:hover{
+    color:var(--accent);
+    text-decoration-color:var(--accent);
+  }
+  .resources .sep{margin:0 4px;color:var(--rule);}
+
+  footer{
+    margin-top:72px;
+    font-family:"IBM Plex Mono",monospace;
+    font-size:.72rem;
+    letter-spacing:.04em;
+    color:var(--ink-faint);
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:640px){
+    .wrap{padding:56px 22px 90px;}
+    .header{
+      grid-template-columns:1fr;
+      gap:24px;
+    }
+    .portrait{width:96px;height:96px;order:-1;}
+    .pub{grid-template-columns:48px 1fr;gap:16px;}
+    .year{font-size:.74rem;}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none !important;}
+  }
+</style>
 </head>
-<body class="bg-gray-100 text-gray-800 text-sm md:text-base">
-    <div class="container mx-auto py-8 w-1/2">
-        <div class="flex flex-wrap">
-            <div class="w-full">
-                <div class="flex flex-wrap">
-                    <div class="w-full lg:w-3/4">
-                        <h1 class="text-3xl font-bold mb-8">
-                            Jiuhai Chen
-                        </h1>
-                        <p class="text-gray-700 mb-2">
-                            I received my Ph.D. from CS at University of Maryland, where I was advised by Tianyi Zhou and Tom Goldstein.
-                        </p>
-                        <p class="text-gray-700 mb-6">
-                            I am interested in Multimodal and Large Language Model, including visual perception, visual generation, reasoning for both MLLMs and LLMs.
-                        </p>
-                        <p class="mb-6">
-                        </p>
 
+<body>
+  <main class="wrap">
 
-                        <div class="flex flex-wrap text-blue-500 mb-10">
-                            <a class="mr-4 anchor-link" href="mailto:jiuhaichen@gmail.com">
-                                Email
-                            </a>
-                            <a class="mr-4 anchor-link" href="https://scholar.google.com/citations?user=eJP77eoAAAAJ&hl=en">
-                                Scholar
-                            </a>
-                            <a class="mr-4 anchor-link" href="https://github.com/JiuhaiChen">
-                                Github
-                            </a>
-                            <a class="mr-4 anchor-link" href="https://www.linkedin.com/in/jiuhai-chen-6a486715a/">
-                                Linkedin
-                            </a>
-                            <a class="mr-4 anchor-link" href="https://x.com/JiuhaiC?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor">
-                                X
-                            </a>
-                        </div>
-                    </div>
-                    <div class="w-full lg:w-1/4 lg:pl-4 mt-6">
-                        <img alt="Your profile picture" class="paper-img-bg rounded-full profile-image" src="117437225-Chen,Jiuhai.jpg"/>
-                    </div>
-                </div>
+    <!-- Header -->
+    <header class="header">
+      <div>
+        <h1 class="name">Jiuhai Chen</h1>
+        <p class="bio">
+          I received my Ph.D. in Computer Science from the University of Maryland
+          in January 2026, where I was advised by
+          <a href="https://tianyizhou.github.io/" target="_blank" rel="noopener">Tianyi Zhou</a>
+          and <a href="https://www.cs.umd.edu/~tomg/" target="_blank" rel="noopener">Tom Goldstein</a>.
+        </p>
+        <p class="bio">
+          My research centers on multimodal and large language models — including
+          visual perception, visual generation, and reasoning across both MLLMs and LLMs.
+        </p>
 
-                <div class="mb-8">
-                    <h2 class="text-2xl font-bold mb-5">
-                        Selected Publications
-                    </h2>
-                    
-                    <div class="flex flex-wrap mb-8 paper-item">
-                        <div class="w-full md:w-4/4 px-3">
-                            <h3 class="text-l font-bold mb-1 paper-title">
-                                <a class="hover:text-blue-500" href="#">
-                                    BLIP3o-NEXT: Next Frontier of Native Image Generation
-                                </a>
-                            </h3>
-                            <p class="text-gray-700 mb-1">
-                                <a class="paper-author authorb" href="#">
-                                    Jiuhai Chen, Le Xue, Zhiyang Xu, Xichen Pan, Shusheng Yang, Can Qin, An Yan, Honglu Zhou, Zeyuan Chen, Lifu Huang, Tianyi Zhou, Junnan Li, Silvio Savarese, Caiming Xiong, Ran Xu
-                                </a>
-                            </p>
-                            <p class="gray-blue-500 mb-1">
-                                </p>
-                            <p>
-                                <a class="anchor-link text-blue-500" href="https://arxiv.org/pdf/2510.15857">paper</a>
-                                /
-                                <a class="anchor-link text-blue-500" href="https://github.com/JiuhaiChen/BLIP3o">code</a>
-                            </p>
-                        </div>
-                    </div>
+        <nav class="links" aria-label="Contact and profiles">
+          <a href="mailto:jiuhaichen@gmail.com">Email</a>
+          <a href="https://scholar.google.com/citations?user=eJP77eoAAAAJ&hl=en" target="_blank" rel="noopener">Scholar</a>
+          <a href="https://github.com/JiuhaiChen" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://www.linkedin.com/in/jiuhai-chen-6a486715a/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://x.com/JiuhaiC" target="_blank" rel="noopener">X</a>
+        </nav>
+      </div>
 
-                    <div class="flex flex-wrap mb-8 paper-item">
-                        <div class="w-full md:w-4/4 px-3">
-                            <h3 class="text-l font-bold mb-1 paper-title">
-                                <a class="hover:text-blue-500" href="#">
-                                    BLIP3-o: A Family of Fully Open Unified Multimodal Models-Architecture, Training and Dataset
-                                </a>
-                            </h3>
-                            <p class="text-gray-700 mb-1">
-                                <a class="paper-author authorb" href="#">
-                                    Jiuhai Chen, Zhiyang Xu, Xichen Pan, Yushi Hu, Can Qin, Tom Goldstein, Lifu Huang, Tianyi Zhou, Saining Xie, Silvio Savarese, Le Xue, Caiming Xiong, Ran Xu
-                                </a>
-                            </p>
-                            <p class="gray-blue-500 mb-1">
-                                </p>
-                            <p>
-                                <a class="anchor-link text-blue-500" href="https://arxiv.org/pdf/2505.09568">paper</a>
-                                /
-                                <a class="anchor-link text-blue-500" href="https://github.com/JiuhaiChen/BLIP3o">code</a>
-                            </p>
-                        </div>
-                    </div>
+      <img class="portrait" src="117437225-Chen,Jiuhai.jpg" alt="Portrait of Jiuhai Chen" />
+    </header>
 
-                    <div class="flex flex-wrap mb-8 paper-item">
-                        <div class="w-full md:w-4/4 px-3">
-                            <h3 class="text-l font-bold mb-1 paper-title">
-                                <a class="hover:text-blue-500" href="#">
-                                    Florence-VL: Enhancing Vision-Language Models with Generative Vision Encoder and Depth-Breadth Fusion
-                                </a>
-                            </h3>
-                            <p class="text-gray-700 mb-1">
-                                <a class="paper-author authorb" href="#">
-                                    Jiuhai Chen, Jianwei Yang, Haiping Wu, Dianqi Li, Jianfeng Gao, Tianyi Zhou, Bin Xiao
-                                </a>
-                            </p>
-                            <p class="gray-blue-500 mb-1">
-                                CVPR 2025
-                            </p>
-                            <p>
-                                <a class="anchor-link text-blue-500" href="https://arxiv.org/pdf/2412.04424">paper</a>
-                                /
-                                <a class="anchor-link text-blue-500" href="https://github.com/JiuhaiChen/CVPR2025-Florence-VL">code</a>
-                            </p>
-                        </div>
-                    </div>
+    <!-- Publications -->
+    <section aria-labelledby="pubs">
+      <div class="section-head">
+        <h2 id="pubs">Selected Publications</h2>
+        <span class="line" aria-hidden="true"></span>
+      </div>
 
-                    <div class="flex flex-wrap mb-8 paper-item">
-                        <div class="w-full md:w-4/4 px-3">
-                            <h3 class="text-l font-bold mb-1 paper-title">
-                                <a class="hover:text-blue-500" href="#">
-                                    Quantifying uncertainty in answers from any language model and enhancing their trustworthiness
-                                </a>
-                            </h3>
-                            <p class="text-gray-700 mb-1">
-                                <a class="paper-author authorb" href="#">
-                                    Jiuhai Chen, Jonas Mueller
-                                </a>
-                            </p>
-                            <p class="gray-blue-500 mb-1">
-                                ACL 2024
-                            </p>
-                            <p>
-                                <a class="anchor-link text-blue-500" href="https://arxiv.org/pdf/2308.16175">paper</a>
-                                /
-                                <a class="anchor-link text-blue-500" href="https://cleanlab.ai/tlm/">code</a>
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-wrap mb-8 paper-item">
-                        <div class="w-full md:w-4/4 px-3">
-                            <h3 class="text-l font-bold mb-1 paper-title">
-                                <a class="hover:text-blue-500" href="#">
-                                    Instructzero: Efficient instruction optimization for black-box large language models
-                                </a>
-                            </h3>
-                            <p class="text-gray-700 mb-1">
-                                <a class="paper-author authorb" href="#">
-                                    Jiuhai Chen*, Lichang Chen*, Tom Goldstein, Heng Huang, Tianyi Zhou
-                                </a>
-                            </p>
-                            <p class="gray-blue-500 mb-1">
-                                ICML 2024
-                            </p>
-                            <p>
-                                <a class="anchor-link text-blue-500" href="https://arxiv.org/pdf/2306.03082">paper</a>
-                                /
-                                <a class="anchor-link text-blue-500" href="https://github.com/JiuhaiChen/InstructZero">code</a>
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-wrap mb-8 paper-item">
-                        <div class="w-full md:w-4/4 px-3">
-                            <h3 class="text-l font-bold mb-1 paper-title">
-                                <a class="hover:text-blue-500" href="#">
-                                    Does your graph need a confidence boost? Convergent boosted smoothing on graphs with tabular node features
-                                </a>
-                            </h3>
-                            <p class="text-gray-700 mb-1">
-                                <a class="paper-author authorb" href="#">
-                                    Jiuhai Chen, Jonas Mueller, Vassilis N Ioannidis, Soji Adeshina, Yangkun Wang, Tom Goldstein, David Wipf
-                                </a>
-                            </p>
-                            <p class="gray-blue-500 mb-1">
-                                ICLR 2022
-                            </p>
-                            <p>
-                                <a class="anchor-link text-blue-500" href="https://arxiv.org/pdf/2110.13413">paper</a>
-                                /
-                                <a class="anchor-link text-blue-500" href="https://github.com/JiuhaiChen/EBBS">code</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <article class="pub">
+        <div class="year">2025</div>
+        <div>
+          <h3 class="pub-title"><a href="https://arxiv.org/pdf/2510.15857" target="_blank" rel="noopener">BLIP3o-NEXT: Next Frontier of Native Image Generation</a></h3>
+          <p class="authors"><span class="me">Jiuhai Chen</span>, Le Xue, Zhiyang Xu, Xichen Pan, Shusheng Yang, Can Qin, An Yan, Honglu Zhou, Zeyuan Chen, Lifu Huang, Tianyi Zhou, Junnan Li, Silvio Savarese, Caiming Xiong, Ran Xu</p>
+          <div class="meta">
+            <span class="resources">
+              <a href="https://arxiv.org/pdf/2510.15857" target="_blank" rel="noopener">paper</a>
+              <span class="sep">/</span>
+              <a href="https://github.com/JiuhaiChen/BLIP3o" target="_blank" rel="noopener">code</a>
+            </span>
+          </div>
         </div>
-    </div>
+      </article>
 
-    <script>
-        // add the class names and their corresponding links to the linksMapping object
-        const linksMapping = {
-            'authorb': 'https://www.google.com/', // Consider updating this to actual author links
-            'authorc': '#',
-        }
+      <article class="pub">
+        <div class="year repeat">2025</div>
+        <div>
+          <h3 class="pub-title"><a href="https://arxiv.org/pdf/2505.09568" target="_blank" rel="noopener">BLIP3-o: A Family of Fully Open Unified Multimodal Models — Architecture, Training and Dataset</a></h3>
+          <p class="authors"><span class="me">Jiuhai Chen</span>, Zhiyang Xu, Xichen Pan, Yushi Hu, Can Qin, Tom Goldstein, Lifu Huang, Tianyi Zhou, Saining Xie, Silvio Savarese, Le Xue, Caiming Xiong, Ran Xu</p>
+          <div class="meta">
+            <span class="resources">
+              <a href="https://arxiv.org/pdf/2505.09568" target="_blank" rel="noopener">paper</a>
+              <span class="sep">/</span>
+              <a href="https://github.com/JiuhaiChen/BLIP3o" target="_blank" rel="noopener">code</a>
+            </span>
+          </div>
+        </div>
+      </article>
 
-        // Function to set links based on class names
-        function setLinks() {
-            // Iterate over the keys (class names) in the linksMapping object
-            for (let className in linksMapping) {
-                // Find all elements with the current class name
-                let elements = document.querySelectorAll('.' + className);
+      <article class="pub">
+        <div class="year repeat">2025</div>
+        <div>
+          <h3 class="pub-title"><a href="https://arxiv.org/pdf/2412.04424" target="_blank" rel="noopener">Florence-VL: Enhancing Vision-Language Models with Generative Vision Encoder and Depth-Breadth Fusion</a></h3>
+          <p class="authors"><span class="me">Jiuhai Chen</span>, Jianwei Yang, Haiping Wu, Dianqi Li, Jianfeng Gao, Tianyi Zhou, Bin Xiao</p>
+          <div class="meta">
+            <span class="venue">CVPR 2025</span>
+            <span class="resources">
+              <a href="https://arxiv.org/pdf/2412.04424" target="_blank" rel="noopener">paper</a>
+              <span class="sep">/</span>
+              <a href="https://github.com/JiuhaiChen/CVPR2025-Florence-VL" target="_blank" rel="noopener">code</a>
+            </span>
+          </div>
+        </div>
+      </article>
 
-                // Iterate over all found elements and set their href attribute
-                elements.forEach(function(element) {
-                    element.href = linksMapping[className];
-                });
-            }
-        }
+      <article class="pub">
+        <div class="year">2024</div>
+        <div>
+          <h3 class="pub-title"><a href="https://arxiv.org/pdf/2308.16175" target="_blank" rel="noopener">Quantifying Uncertainty in Answers from Any Language Model and Enhancing Their Trustworthiness</a></h3>
+          <p class="authors"><span class="me">Jiuhai Chen</span>, Jonas Mueller</p>
+          <div class="meta">
+            <span class="venue">ACL 2024</span>
+            <span class="resources">
+              <a href="https://arxiv.org/pdf/2308.16175" target="_blank" rel="noopener">paper</a>
+              <span class="sep">/</span>
+              <a href="https://cleanlab.ai/tlm/" target="_blank" rel="noopener">code</a>
+            </span>
+          </div>
+        </div>
+      </article>
 
-        // Call the function to set the links
-        setLinks();
-    </script>
+      <article class="pub">
+        <div class="year repeat">2024</div>
+        <div>
+          <h3 class="pub-title"><a href="https://arxiv.org/pdf/2306.03082" target="_blank" rel="noopener">InstructZero: Efficient Instruction Optimization for Black-Box Large Language Models</a></h3>
+          <p class="authors"><span class="me">Jiuhai Chen</span>*, Lichang Chen*, Tom Goldstein, Heng Huang, Tianyi Zhou</p>
+          <div class="meta">
+            <span class="venue">ICML 2024</span>
+            <span class="resources">
+              <a href="https://arxiv.org/pdf/2306.03082" target="_blank" rel="noopener">paper</a>
+              <span class="sep">/</span>
+              <a href="https://github.com/JiuhaiChen/InstructZero" target="_blank" rel="noopener">code</a>
+            </span>
+          </div>
+        </div>
+      </article>
+
+      <article class="pub">
+        <div class="year">2022</div>
+        <div>
+          <h3 class="pub-title"><a href="https://arxiv.org/pdf/2110.13413" target="_blank" rel="noopener">Does Your Graph Need a Confidence Boost? Convergent Boosted Smoothing on Graphs with Tabular Node Features</a></h3>
+          <p class="authors"><span class="me">Jiuhai Chen</span>, Jonas Mueller, Vassilis N. Ioannidis, Soji Adeshina, Yangkun Wang, Tom Goldstein, David Wipf</p>
+          <div class="meta">
+            <span class="venue">ICLR 2022</span>
+            <span class="resources">
+              <a href="https://arxiv.org/pdf/2110.13413" target="_blank" rel="noopener">paper</a>
+              <span class="sep">/</span>
+              <a href="https://github.com/JiuhaiChen/EBBS" target="_blank" rel="noopener">code</a>
+            </span>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <footer>© <span id="yr"></span> Jiuhai Chen</footer>
+  </main>
+
+  <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
 </body>
 </html>
